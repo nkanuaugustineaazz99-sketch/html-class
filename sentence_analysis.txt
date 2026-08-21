@@ -1,0 +1,31 @@
+Algorithm SentenceAnalysis
+Input: A sentence ending with a point '.'
+Output: Length of the sentence, number of words, number of vowels
+
+Begin
+    Set length ← 0
+    Set words ← 0
+    Set vowels ← 0
+
+    Read sentence character by character
+
+    For each character ch in sentence do
+        length ← length + 1
+
+        If ch is a vowel (a, e, i, o, u, A, E, I, O, U) then
+            vowels ← vowels + 1
+        EndIf
+
+        If ch = ' ' then
+            words ← words + 1
+        EndIf
+    EndFor
+
+    // Add 1 to words because last word is not followed by a space
+    words ← words + 1
+
+    // The last character is the point, already counted in length
+    Print "Length of sentence = ", length
+    Print "Number of words = ", words
+    Print "Number of vowels = ", vowels
+End
