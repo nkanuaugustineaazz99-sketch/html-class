@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iPhone 16 Pro - Buy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; }
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 60px 0; }
+    .iphone-img { transition: all 0.4s ease; max-width: 450px; }
+    .color-btn { width: 35px; height: 35px; border-radius: 50%; border: 2px solid #333; cursor: pointer; margin-right: 10px; }
+    .color-btn.active { border: 2px solid #0071e3; }
+    .price { font-size: 2.5rem; font-weight: 700; }
+    .btn-buy { background: #0071e3; color: white; border-radius: 30px; padding: 12px 40px; font-size: 1.2rem; border: none; }
+    .btn-buy:hover { background: #0077ed; }
+    .storage-btn { border: 1px solid #444; border-radius: 12px; padding: 12px 20px; cursor: pointer; background: #1d1d1f; }
+    .storage-btn.active { border: 2px solid #0071e3; background: #0a2540; }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      
+      <!-- LEFT: IMAGE -->
+      <div class="col-lg-6 hidden mb-5 mb-lg-0">
+        <img id="iphoneImage" src="luxury car.jpg" 
+             alt="iPhone 16 Pro" 
+             class=""
+             style="width: 150%; height: 500px;">
+      </div>
+
+      <!-- RIGHT: BUY SECTION -->
+      <div class="col-lg-6">
+        <p class="text-secondary">New</p>
+        <h1 class="display-4 fw-bold">iPhone 16 Pro</h1>
+        <p class="lead text-secondary">Titanium. So strong. So light. So Pro.</p>
+
+        <!-- COLOR SELECTION -->
+        <h6 class="mt-4 mb-2">Finish. <span id="colorName">Natural Titanium</span></h6>
+        <div class="d-flex mb-4">
+          <div class="color-btn active" style="background: #d1c9bd;" data-color="Natural Titanium" data-img="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-7inch-naturaltitanium?wid=5120&fmt=pjpg"></div>
+          <div class="color-btn" style="background: #3a3a3c;" data-color="Black Titanium" data-img="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-7inch-blacktitanium?wid=5120&fmt=pjpg"></div>
+          <div class="color-btn" style="background: #f0f0f0;" data-color="White Titanium" data-img="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-7inch-whitetitanium?wid=5120&fmt=pjpg"></div>
+          <div class="color-btn" style="background: #c6a6b7;" data-color="Desert Titanium" data-img="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-7inch-deserttitanium?wid=5120&fmt=pjpg"></div>
+        </div>
+
+        <!-- STORAGE SELECTION -->
+        <h6 class="mb-2">Storage.</h6>
+        <div class="row g-2 mb-4">
+          <div class="col-6 col-md-4">
+            <div class="storage-btn text-center active" data-price="999" data-storage="128GB">
+              <b>128GB</b><br><small>From $999</small>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="storage-btn text-center" data-price="1099" data-storage="256GB">
+              <b>256GB</b><br><small>From $1099</small>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="storage-btn text-center" data-price="1299" data-storage="512GB">
+              <b>512GB</b><br><small>From $1299</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRICE + BUTTON -->
+        <h2 class="price" id="priceDisplay">$999</h2>
+        <p class="text-secondary mb-4" id="storageDisplay">128GB Storage</p>
+
+        <button class="btn-buy" onclick="buyNow()">Buy Now</button>
+        <p class="mt-3 text-secondary"><small>Free delivery and returns</small></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let currentPrice = 999;
+  let currentStorage = "128GB";
+
+  // 1. COLOR SELECTION - LOOP + CONDITIONAL + DATA STRUCTURE
+  const colorBtns = document.querySelectorAll('.color-btn');
+  colorBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Remove active from all
+      colorBtns.forEach(b => b.classList.remove('active'));
+      // Add active to clicked
+      this.classList.add('active');
+      
+      // Update image and color name
+      document.getElementById('iphoneImage').src = this.dataset.img;
+      document.getElementById('colorName').innerText = this.dataset.color;
+    });
+  });
+
+  // 2. STORAGE SELECTION - LOOP + CONDITIONAL
+  const storageBtns = document.querySelectorAll('.storage-btn');
+  storageBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      storageBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      currentPrice = this.dataset.price;
+      currentStorage = this.dataset.storage;
+      
+      // Update price on screen
+      document.getElementById('priceDisplay').innerText = `$${currentPrice}`;
+      document.getElementById('storageDisplay').innerText = `${currentStorage} Storage`;
+    });
+  });
+
+  // 3. BUY NOW FUNCTION - CONDITIONAL
+  function buyNow() {
+    let color = document.querySelector('.color-btn.active').dataset.color;
+    
+    // Show confirmation
+    alert(`✅ Added to Bag\nModel: iPhone 16 Pro\nColor: ${color}\nStorage: ${currentStorage}\nPrice: $${currentPrice}`);
+    
+    // In real website: window.location.href = "/checkout"
+  }
+</script>
+
+</body>
+</html>
